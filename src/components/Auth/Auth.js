@@ -7,13 +7,19 @@ import Input from './Input';
 import { GoogleLogin } from 'react-google-login';
 import Icon from './Icon'
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { signin, signup } from '../../actions/auth'
+
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
 
 const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
-  //const [formData, setFormData] = useState(initialState)
+  const [formData, setFormData] = useState(initialState)
   const dispatch = useDispatch();
+  const history = useHistory()
+
 
   const clientId = '44906728884-i5fe6f0dr93dv7aroo279ufc5i5qem7q.apps.googleusercontent.com'
 
@@ -21,11 +27,19 @@ const Auth = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if(isSignUp) {
+      dispatch(signup(formData, history))
+    } else {
+      dispatch(signin(formData, history))
+    }
 
   }
 
-  const handleChange = () => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value } )
 
   }
 
@@ -40,6 +54,7 @@ const Auth = () => {
 
     try {
       dispatch({ type: 'AUTH', data: { result, token }})
+      history.push('/')
     } catch (error) {
       console.log(error);
     }

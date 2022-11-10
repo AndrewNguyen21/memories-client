@@ -7,10 +7,12 @@ import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ( {currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({  title: '', message: '', tags: [], selectedFile: '' });
-  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : 0);
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'))
+
+  console.log(currentId);
 
   useEffect(() => {
     if(post) {
@@ -19,7 +21,7 @@ const Form = ( {currentId, setCurrentId }) => {
   }, [post])
 
   const clear = () => {
-    setCurrentId(null);
+    setCurrentId(0);
     setPostData({  title: '', message: '', tags: [], selectedFile: '' })
   };
 
@@ -30,14 +32,14 @@ const Form = ( {currentId, setCurrentId }) => {
   //   setPostData({...postData, tags: tagsArray});
   // }
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(currentId) {
-      dispatch(updatePost(currentId, postData));
+    if(currentId === 0) {
+      dispatch(createPost({...postData, name: user?.result?.name}))
     }
     else {
-      dispatch(createPost({...postData, name: user?.result?.name}))
+      dispatch(updatePost(currentId, {...postData, name: user?.result?.name}));
     }
 
     clear();

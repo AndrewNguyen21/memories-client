@@ -4,7 +4,7 @@ export default makeStyles((theme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: '',
   },
   smMargin: {
     margin: theme.spacing(1),

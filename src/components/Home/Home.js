@@ -45,7 +45,7 @@ const Home = () => {
   const handleAdd = (tag) => {
     setTags([...tags, tag]);
   };
- 
+
   const handleDelete = (tagToDelete) => {
     setTags(tags.filter((tag) => tag !== tagToDelete));
   };
@@ -63,7 +63,7 @@ const Home = () => {
 
   return (
     <Grow in>
-      <Container>
+      <Container maxWidth="xl">
         <Grid
           className={classes.gridContainer}
           container
@@ -71,10 +71,10 @@ const Home = () => {
           alignItems='stretch'
           spacing={3}
         >
-          <Grid item xs={12} sm={6} md={8}>
+          <Grid item xs={12} sm={12} md={9} className={classes.postsContainer}>
             <Posts setCurrentId={setCurrentId} />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={12} md={3}>
             <AppBar
               className={classes.appBarSearch}
               position='static'
@@ -103,6 +103,7 @@ const Home = () => {
                 className={classes.searchButton}
                 variant='contained'
                 color='primary'
+                disabled={(tags.length < 1) && (!search || (search.replace(/\s/g, '').length==0))}
               >
                 Search
               </Button>
@@ -115,6 +116,11 @@ const Home = () => {
             )}
           </Grid>
         </Grid>
+        {/* <div className={classes.smallScreen}> */}
+        <Paper elevation={6}  className={classes.paginationSmall}>
+        <Paginate page={page}/>
+        </Paper>
+        {/* </div> */}
       </Container>
     </Grow>
   );

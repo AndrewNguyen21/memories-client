@@ -15,10 +15,10 @@ export default makeStyles((theme) => ({
     },
   },
   heading: {
-    color: theme.palette.primary.main,
-    textDecoration: 'none',
-    fontSize: '2em',
-    fontWeight: 300,
+    // color: theme.palette.primary.main,
+    // textDecoration: 'none',
+    // fontSize: '2em',
+    // fontWeight: 900,
   },
   image: {
     marginLeft: '10px',

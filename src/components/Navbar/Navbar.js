@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
 import useStyles from './styles';
-import memories from '../../images/memories.png';
+import memoriesLogo from '../../images/memories-logo.png';
+import memoriesText from '../../images/memories-text.png';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 
@@ -30,18 +31,19 @@ const Navbar = () => {
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
-    history.push('/auth');
     setUser(null);
+    history.push('/auth');
+    // return (
+    //   <Redirect to='/auth'/>
+    // )
   };
 
   return (
     <AppBar className={classes.appBar} position='static' color='inherit'>
-      <div className={classes.brandContainer}>
-        <Typography component={Link} to='/' className={classes.heading} variant='h3' align='center'>
-          Memories
-        </Typography>
-        <img className={classes.image} src={memories} alt='memories' height='60' />
-      </div>
+      <Link to="/" className={classes.brandContainer}>
+        <img component={Link} to="/" src={memoriesText} alt="icon" height="45px" />
+        <img className={classes.image} src={memoriesLogo} alt="icon" height="40px" />
+      </Link>
       <Toolbar className={classes.toolbar}>
         {user ? (
           <div className={classes.profile}>
@@ -56,9 +58,14 @@ const Navbar = () => {
             </Button>
           </div>
         ) : (
-          <Button component={Link} to='/auth' variant='contained' color='primary'>
+          // <Button component={Link} to='/auth' variant='contained' color='primary'>
+          //   Sign In
+          // </Button>
+          <Link to='/auth'>
+            <Button variant='contained' color='primary'>
             Sign In
           </Button>
+          </Link>
         )}
       </Toolbar>
     </AppBar>

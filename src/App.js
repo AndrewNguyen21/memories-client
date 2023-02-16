@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import Auth from './components/Auth/Auth';
+import Creator from './components/Creator/Creator';
 import PostDetails from './components/PostDetails/PostDetails';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -24,6 +25,7 @@ const App = () => {
           {/* <Route path='/posts' exact component={() => (!user ? <Redirect to='/auth' /> : <Home/>)} /> */}
           <Route path='/posts/search' exact component={Home} />
           <Route path='/posts/:id' component={PostDetails} />
+          <Route path="/creators/:name" exact component={Creator} />
           <Route path='/auth' exact component={() => (!user ? <Auth /> : <Redirect to='/posts' />)} />
           {/* <Route path='/auth' exact component={Auth}/> */}
         </Switch>

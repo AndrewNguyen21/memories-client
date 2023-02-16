@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Paper, Typography, CircularProgress, Divider, Card, TextField } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import useStyles from './styles';
 import { getPost, searchPosts, updatePost} from '../../actions/posts'
 import CommentSection from './CommentSection';
@@ -92,7 +92,13 @@ const PostDetails = () => {
           <Typography variant="h3" component="h2">{postData.title}</Typography>
           <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{postData.tags.map((tag) => `#${tag} `)}</Typography>
           <Typography gutterBottom variant="body1" component="p">{postData.message}</Typography>
-          <Typography variant="h6">Created by: {post.name}</Typography>
+          {/* <Typography variant="h6">Created by: {post.name}</Typography> */}
+          <Typography variant="h6">
+            Created by:
+            <Link to={`/creators/${post.name}`} style={{ textDecoration: 'none', color: '#3f51b5' }}>
+              {` ${post.name}`}
+            </Link>
+          </Typography>
           <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
           {(user?.result?.googleId === post?.creator ||
           user?.result?._id === post?.creator) && (

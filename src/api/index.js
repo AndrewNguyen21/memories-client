@@ -20,6 +20,7 @@ export const deletePost = (id) => API.delete(`/posts/${id}`)
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`)
 export const fetchSearchPosts = (searchQuery) => API.get(`/posts/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags}`)
 export const comment = (value, id) => API.post(`/posts/${id}/commentPost`, {value})
+export const fetchPostsByCreator = (name) => API.get(`/posts/creator?name=${name}`);
 
 export const signIn = (formData) => API.post('/users/signin', formData)
 export const signUp = (formData) => API.post('/users/signup', formData)

@@ -9,6 +9,7 @@ import {
   START_LOADING,
   END_LOADING,
   COMMENT,
+  FETCH_BY_CREATOR
 } from '../constants/actionTypes';
 
 export default (state = { isLoading: true, posts: [] }, action) => {
@@ -55,6 +56,8 @@ export default (state = { isLoading: true, posts: [] }, action) => {
       };
     case FETCH_SEARCH:
       return { ...state, posts: action.payload };
+    case FETCH_BY_CREATOR:
+        return { ...state, posts: action.payload.data };
     case START_LOADING:
       return { ...state, isLoading: true };
     case END_LOADING:

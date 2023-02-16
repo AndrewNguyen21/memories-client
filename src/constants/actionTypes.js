@@ -10,3 +10,4 @@ export const FETCH_SEARCH = 'FETCH_SEARCH';
 export const START_LOADING = 'START_LOADING';
 export const END_LOADING = 'END_LOADING';
 export const COMMENT = 'COMMENT';
+export const FETCH_BY_CREATOR = 'FETCH_BY_CREATOR';

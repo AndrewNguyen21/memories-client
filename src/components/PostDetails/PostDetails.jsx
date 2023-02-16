@@ -28,7 +28,7 @@ const PostDetails = () => {
 
   useEffect(() => {
     dispatch(getPost(id))
-  }, [id])
+  }, [id, dispatch])
 
   useEffect(() => {
     if(post) {
@@ -37,7 +37,7 @@ const PostDetails = () => {
     if(post) {
       setPostData(post);
     }
-  }, [post])
+  }, [post, dispatch])
 
   
 
@@ -90,9 +90,14 @@ const PostDetails = () => {
           {!editing ? (
             <div>
           <Typography variant="h3" component="h2">{postData.title}</Typography>
-          <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{postData.tags.map((tag) => `#${tag} `)}</Typography>
+          {/* <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{postData.tags.map((tag) => `#${tag} `)}</Typography> */}
+          <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags.map((tag) => (
+            <Link to={`/tags/${tag}`} style={{ textDecoration: 'none', color: '#3f51b5' }}>
+              {` #${tag} `}
+            </Link>
+          ))}
+          </Typography>
           <Typography gutterBottom variant="body1" component="p">{postData.message}</Typography>
-          {/* <Typography variant="h6">Created by: {post.name}</Typography> */}
           <Typography variant="h6">
             Created by:
             <Link to={`/creators/${post.name}`} style={{ textDecoration: 'none', color: '#3f51b5' }}>
@@ -141,7 +146,7 @@ const PostDetails = () => {
           newChipKeys={[' ']}
           fullWidth
         />
-        <div /*className={classes.fileInput}*/>
+        <div>
           <FileBase
             type='file'
             multiple={false}
@@ -156,14 +161,6 @@ const PostDetails = () => {
           </Button>
           </div>
           )}
-         {/* // <Typography variant="h3" component="h2">{post.title}</Typography>
-          // <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
-          // <Typography gutterBottom variant="body1" component="p">{post.message}</Typography>
-          // <Typography variant="h6">Created by: {post.name}</Typography>
-          // <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
-          // <Button style={{ marginTop: '10px'}} fullWidth variant='contained' color='primary' onClick={toggleEdit}>
-          //   Edit
-          // </Button>  */}
           <Divider style={{ margin: '20px 0' }} />
           <CommentSection post={post}/>
           <Divider style={{ margin: '20px 0' }} />
@@ -179,12 +176,12 @@ const PostDetails = () => {
           <div className={classes.recommendedPosts}>
           {recommendedPosts.map(({ title, name, likes, selectedFile, _id}) => (
             <Card className={classes.recommendCard} raised elevation={6} onClick={() => openPost(_id)} key={_id}>
+              <img src={selectedFile} alt='post' width='200px' height='150px'/>
               <div className={classes.recommendCardContent}>
               <Typography gutterBottom variant='h6'>{title}</Typography>
               <Typography gutterBottom variant='subtitle2'>{name}</Typography>
               <Typography gutterBottom variant='subtitle1'>Likes: {likes.length}</Typography>
               </div>
-              <img src={selectedFile} alt='post' width='200px' height='150px'/>
             </Card>
           ))}
           </div>

@@ -12,7 +12,7 @@ const Paginate = ({ page }) => {
 
   useEffect(() => {
     if(page) dispatch(getPosts(page))
-  }, [page]) 
+  }, [page, dispatch]) 
 
   return (
     <Pagination classes={{ul: classes.ul}} count={numberOfPages} page={Number(page) || 1}  color='primary' renderItem={(item) => (<PaginationItem {...item} component={Link} to={`/posts?page=${item.page}`}/>)}/>

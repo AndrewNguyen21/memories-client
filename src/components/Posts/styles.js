@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles((theme) => ({
   container: {
     display: 'flex',
-    //alignItems: 'center',
     justifyContent: '',
     flexDirection: 'row',
   },
@@ -17,5 +16,5 @@ export default makeStyles((theme) => ({
     textAlign: 'center',
     display: 'flex',
     justifyContent: 'center',
-  }
+  },
 }));

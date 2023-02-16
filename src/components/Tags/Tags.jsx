@@ -4,22 +4,22 @@ import { Typography, CircularProgress, Grid, Divider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Post from '../Posts/Post/Post';
-import { getPostsByCreator } from '../../actions/posts';
+import { searchPosts } from '../../actions/posts';
 
-const Creator = () => {
+const Tags = () => {
   const { name } = useParams();
   const dispatch = useDispatch();
   const { posts, isLoading } = useSelector((state) => state.posts);
 
   useEffect(() => {
-    dispatch(getPostsByCreator(name));
+      dispatch(searchPosts({ tags: name }));
   }, [dispatch, name]);
 
   if (!posts.length && !isLoading) return 'No posts';
 
   return (
     <div>
-      <Typography variant="h2">{name}</Typography>
+      <Typography variant="h2">#{name}</Typography>
       <Divider style={{ margin: '20px 0 50px 0' }} />
       {isLoading ? <CircularProgress /> : (
         <Grid container alignItems="stretch" spacing={3}>
@@ -32,6 +32,7 @@ const Creator = () => {
       )}
     </div>
   );
-};
+}
 
-export default Creator;
+
+export default Tags;

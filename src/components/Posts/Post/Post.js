@@ -16,7 +16,7 @@ import useStyles from './styles';
 import { deletePost, likePost } from '../../../actions/posts';
 import { useHistory } from 'react-router-dom';
 
-const Post = ({ post, setCurrentId }) => {
+const Post = ({ post }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -24,34 +24,37 @@ const Post = ({ post, setCurrentId }) => {
   const [likes, setLikes] = useState(post?.likes);
 
   const userId = user?.result.googleId || user?.result._id;
-  const hasLikedPost = post?.likes.find(
-    (like) => like === (userId),
-  );
-
+  const hasLikedPost = post?.likes.find((like) => like === userId);
 
   const Likes = () => {
-    if (post.likes.length > 0) { 
-      return post?.likes.find(
-        (like) => like === (userId),
-      ) ? (
+    if (post.likes.length > 0) {
+      return post?.likes.find((like) => like === userId) ? (
         <>
-          <ThumbUpAltIcon fontSize='small' color={hasLikedPost ? 'primary' : 'disabled'} /> &nbsp;
+          <ThumbUpAltIcon
+            fontSize='small'
+            color={hasLikedPost ? 'primary' : 'disabled'}
+          />{' '}
+          &nbsp;
           {likes.length > 2
             ? `You and ${likes.length - 1} others`
-            : `${likes.length} like${
-                likes.length > 1 ? 's' : ''
-              }`}{' '}
+            : `${likes.length} like${likes.length > 1 ? 's' : ''}`}{' '}
         </>
       ) : (
         <>
-          <ThumbUpAltIcon fontSize='small' color={hasLikedPost ? 'primary' : 'disabled'}/> &nbsp; {likes.length}{' '}
-          {likes.length === 1 ? 'Like' : 'Likes'}
+          <ThumbUpAltIcon
+            fontSize='small'
+            color={hasLikedPost ? 'primary' : 'disabled'}
+          />{' '}
+          &nbsp; {likes.length} {likes.length === 1 ? 'Like' : 'Likes'}
         </>
       );
     }
     return (
       <>
-        <ThumbUpAltIcon fontSize='small' color={hasLikedPost ? 'primary' : 'disabled'}/>
+        <ThumbUpAltIcon
+          fontSize='small'
+          color={hasLikedPost ? 'primary' : 'disabled'}
+        />
         &nbsp;Like
       </>
     );
@@ -85,31 +88,6 @@ const Post = ({ post, setCurrentId }) => {
             {moment(post.createdAt).fromNow()}
           </Typography>
         </div>
-        {/* {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-        // <div className={classes.overlay2}>
-        //   <Button
-        //     style={{ color: 'white' }}
-        //     size='small'
-        //     onClick={() => {
-        //       setCurrentId(post._id);
-        //     }}
-        //   >
-        //     <MoreHorizIcon fontSize='medium' />
-        //   </Button>
-        // </div>
-        <div className={classes.overlay2} name="edit">
-        <Button
-          onClick={(e) => {
-            e.stopPropagation();
-            setCurrentId(post._id);
-          }}
-          style={{ color: 'white' }}
-          size="small"
-        >
-          <MoreHorizIcon fontSize="medium" />
-        </Button>
-      </div>
-      )} */}
         <div className={classes.details}>
           <Typography variant='body2' color='textSecondary'>
             {post.tags.map((tag) => `#${tag} `)}
@@ -120,7 +98,7 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
         <CardContent>
           <Typography variant='body2' color='textSecondary' component='p'>
-          {post.message.slice(0,60)}...
+            {post.message.slice(0, 60)}...
           </Typography>
         </CardContent>
       </ButtonBase>

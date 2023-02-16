@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getPosts, searchPosts } from '../../actions/posts';
+import { searchPosts } from '../../actions/posts';
 import {
   Button,
   Container,
@@ -32,10 +32,6 @@ const Home = () => {
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
 
-  // useEffect(() => {
-  //   dispatch(getPosts());
-  // }, [currentId, dispatch]);
-
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
       searchPost();
@@ -51,19 +47,15 @@ const Home = () => {
   };
 
   const searchPost = () => {
-    if (search.trim() || tags) {
-      //console.log(tags.join(','))
-      //dispatch(searchPosts({search, tags: tags.join(',').replace(/#/g, '')}))
-      dispatch(searchPosts({search, tags: tags.join(',')}))
-      history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
-    } else {
-      history.push('/');
-    }
+    dispatch(searchPosts({ search, tags: tags.join(',') }));
+    history.push(
+      `/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`,
+    );
   };
 
   return (
     <Grow in>
-      <Container maxWidth="xl">
+      <Container maxWidth='xl'>
         <Grid
           className={classes.gridContainer}
           container
@@ -103,24 +95,27 @@ const Home = () => {
                 className={classes.searchButton}
                 variant='contained'
                 color='primary'
-                disabled={(tags.length < 1) && (!search || (search.replace(/\s/g, '').length==0))}
+                disabled={
+                  tags.length < 1 &&
+                  (!search || search.replace(/\s/g, '').length === 0)
+                }
               >
                 Search
               </Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-            {(!searchQuery && !tags.length) && (
-              <Paper elevation={6}  className={classes.pagination}>
-              <Paginate page={page}/>
-            </Paper>
+            {!searchQuery && !tags.length && (
+              <Paper elevation={6} className={classes.pagination}>
+                <Paginate page={page} />
+              </Paper>
             )}
           </Grid>
         </Grid>
-        {/* <div className={classes.smallScreen}> */}
-        <Paper elevation={6}  className={classes.paginationSmall}>
-        <Paginate page={page}/>
-        </Paper>
-        {/* </div> */}
+        {!searchQuery && !tags.length && (
+          <Paper elevation={6} className={classes.paginationSmall}>
+            <Paginate page={page} />
+          </Paper>
+        )}
       </Container>
     </Grow>
   );

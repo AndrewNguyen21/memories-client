@@ -10,7 +10,7 @@ import {
   START_LOADING,
   END_LOADING,
   COMMENT,
-  FETCH_BY_CREATOR
+  FETCH_BY_CREATOR,
 } from '../constants/actionTypes';
 
 export const getPost = (id) => async (dispatch) => {
@@ -113,7 +113,9 @@ export const commentPost = (value, id) => async (dispatch) => {
 export const getPostsByCreator = (name) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    const { data: { data } } = await api.fetchPostsByCreator(name);
+    const {
+      data: { data },
+    } = await api.fetchPostsByCreator(name);
 
     dispatch({ type: FETCH_BY_CREATOR, payload: { data } });
     dispatch({ type: END_LOADING });

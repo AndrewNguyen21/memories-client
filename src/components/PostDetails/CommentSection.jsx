@@ -39,13 +39,6 @@ const handleClick = async () => {
           ))}
           <div ref={commentsRef}/>
           </div>
-          {/* {comments.map((comment, index) => (
-            <Typography key={index} gutterBottom variant='subtitle1'>
-              <strong>{comment.split(': ')[0]}:</strong>
-              {comment.split(':')[1]}
-            </Typography>
-          ))}
-          <div ref={commentsRef}/> */}
         </div>
         {user?.result.name && (
         <div style={{width: '50%'}}>

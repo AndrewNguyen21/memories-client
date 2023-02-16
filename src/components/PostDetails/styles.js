@@ -30,7 +30,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     overflowX: 'auto',
     [theme.breakpoints.down('sm')]: {
-    flexDirection: 'row',
+      flexDirection: 'row',
     },
   },
   recommendCard: {
@@ -45,8 +45,8 @@ export default makeStyles((theme) => ({
     marginLeft: '15px',
     marginRight: '15px',
     [theme.breakpoints.down('sm')]: {
-    minWidth: '200px',
-    height: '250px',
+      minWidth: '200px',
+      height: '250px',
     },
   },
   recommendCardContent: {
@@ -66,10 +66,10 @@ export default makeStyles((theme) => ({
   },
   commentsInnerContainer: {
     marginRight: '30px',
-    width: '45%'
+    width: '45%',
   },
   commentsScroll: {
     height: '200px',
     overflowY: 'scroll',
-  }
+  },
 }));

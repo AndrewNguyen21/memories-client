@@ -14,12 +14,6 @@ export default makeStyles((theme) => ({
       flexDirection: 'column',
     },
   },
-  heading: {
-    // color: theme.palette.primary.main,
-    // textDecoration: 'none',
-    // fontSize: '2em',
-    // fontWeight: 900,
-  },
   image: {
     marginLeft: '10px',
     marginTop: '5px',

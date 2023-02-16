@@ -12,7 +12,7 @@ export default makeStyles((theme) => ({
     marginTop: '1rem',
     padding: '16px',
     [theme.breakpoints.down('sm')]: {
-      display: 'none'
+      display: 'none',
     },
   },
   paginationSmall: {
@@ -20,7 +20,7 @@ export default makeStyles((theme) => ({
     marginTop: '1rem',
     padding: '16px',
     [theme.breakpoints.up('lg')]: {
-    display: 'none'
+      display: 'none',
     },
   },
   gridContainer: {
@@ -28,5 +28,5 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column-reverse',
     },
-  },  
+  },
 }));

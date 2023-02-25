@@ -7,7 +7,7 @@ export default makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     padding: theme.spacing(2),
-    borderRadius: '15px'
+    borderRadius: '15px',
   },
   root: {
     '& .MuiTextField-root': {
@@ -27,5 +27,11 @@ export default makeStyles((theme) => ({
   },
   googleButton: {
     marginBottom: theme.spacing(2),
+  },
+  loading: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '25px',
+    marginBottom: '25px',
   },
 }));
